@@ -16,8 +16,24 @@ class Student:
         else:
             return 'Ошибка'
 
+
+    def __average_grade(self):
+        sum = 0
+        for sum1 in self.grades.values():
+            sum2 = 0
+            for grade in sum1:
+                sum2 += grade
+            m_course = sum2 / len(sum1)
+            sum += m_course
+            sum += 1
+            if sum == 0:
+                return f'Нет оценок'
+            else:
+                return f'{sum / len(self.grades.values())}'
+
+
     def __str__(self):
-        some_student = f'Имя: {self.name}\n' f'Фамилия: {self.surname}\n' f'Средняя оценка за домашнее задание: {self.grades}\n' f'Курсы в процессе изучения: {', '.join(self.courses_in_progress)}\n' f'Завершенные курсы: {', '.join(self.finished_courses)}'
+        some_student = f'Имя: {self.name}\n' f'Фамилия: {self.surname}\n' f'Средняя оценка за домашнее задание: {self.__average_grade()}\n' f'Курсы в процессе изучения: {', '.join(self.courses_in_progress)}\n' f'Завершенные курсы: {', '.join(self.finished_courses)}'
         return some_student
 
 class Mentor:
@@ -70,13 +86,13 @@ lecturer_list = [lecturer1, lecturer2]
 rewiewer1 = Reviewer('Ignat', 'Lobanov')
 rewiewer1.courses_attached += ['Python']
 rewiewer1.rate_hw(student1, 'Python', 9)
-rewiewer1.rate_hw(student1, 'Python', 8)
+rewiewer1.rate_hw(student1, 'Python', 9)
 
 
 rewiewer2 = Reviewer('Sergey', 'Martinov')
 rewiewer2.courses_attached += ['Python']
 rewiewer2.rate_hw(student2, 'Python', 10)
-rewiewer1.rate_hw(student2, 'Python', 10)
+rewiewer2.rate_hw(student2, 'Python', 10)
 
 student1.grade_lecturer(lecturer1, 'Python', 7)
 student1.grade_lecturer(lecturer2, 'Python', 9)
@@ -85,6 +101,6 @@ student2.grade_lecturer(lecturer1, 'Python', 10)
 student2.grade_lecturer(lecturer2, 'Python', 9)
 
 
-print(lecturer1)
+print(student2)
 
 
