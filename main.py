@@ -16,21 +16,11 @@ class Student:
         else:
             return 'Ошибка'
 
-
     def __average_grade(self):
-        sum = 0
-        for sum1 in self.grades.values():
-            sum2 = 0
-            for grade in sum1:
-                sum2 += grade
-            m_course = sum2 / len(sum1)
-            sum += m_course
-            sum += 1
-            if sum == 0:
-                return f'Нет оценок'
-            else:
-                return f'{sum / len(self.grades.values())}'
-
+        if not self.grades:
+            return 0.0
+        all_grades = [grd for grade in self.grades.values() for grd in grade]
+        return round(sum(all_grades) / len(all_grades), 1)
 
     def __str__(self):
         some_student = f'Имя: {self.name}\n' f'Фамилия: {self.surname}\n' f'Средняя оценка за домашнее задание: {self.__average_grade()}\n' f'Курсы в процессе изучения: {', '.join(self.courses_in_progress)}\n' f'Завершенные курсы: {', '.join(self.finished_courses)}'
@@ -101,6 +91,7 @@ student2.grade_lecturer(lecturer1, 'Python', 10)
 student2.grade_lecturer(lecturer2, 'Python', 9)
 
 
-print(student2)
+print(student1)
+
 
 
