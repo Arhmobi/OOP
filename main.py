@@ -36,8 +36,14 @@ class Mentor:
 class Lecturer(Mentor):
     grades = {}
 
+    def __average_grade(self):
+        if not self.grades:
+            return 0.0
+        all_grades = [grd for grade in self.grades.values() for grd in grade]
+        return round(sum(all_grades) / len(all_grades), 1)
+
     def __str__(self):
-        return f'Имя: {self.name}\n' f'Фамилия: {self.surname}\n' f' Средняя оценка за лекции: {self.grades}'
+        return f'Имя: {self.name}\n' f'Фамилия: {self.surname}\n' f' Средняя оценка за лекции: {self.__average_grade()}'
 
 class Reviewer(Mentor):
     def rate_hw(self, student, course, grade):
@@ -91,7 +97,7 @@ student2.grade_lecturer(lecturer1, 'Python', 10)
 student2.grade_lecturer(lecturer2, 'Python', 9)
 
 
-print(student1)
+print(lecturer1)
 
 
 
