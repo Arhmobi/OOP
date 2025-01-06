@@ -125,22 +125,26 @@ student_list = [student1, student2]
 
 def average_student(student_list, course):
     sum_ = 0
+    len_gr = 0
     for student in student_list:
         if course in student.grades.keys():
             for grades in student.grades[course]:
                 sum_ += grades
-    print(sum_ / len(student_list))
+                len_gr = len(student.grades[course])
+    print(sum_ / len_gr)
 
 average_student(student_list, 'Python')
 
 lecturer_list = [lecturer1, lecturer2]
 def average_lecturer(lecturer_list, course):
+    len_gr = 0
     sum_ = 0
     for lecturer in lecturer_list:
         if course in lecturer.grades.keys():
             for grades in lecturer.grades[course]:
                 sum_ += grades
-    print(sum_ / len(lecturer_list))
+                len_gr = len(lecturer.grades[course])
+    print(sum_ / len_gr)
 
 average_lecturer(lecturer_list, 'Python')
 print(student1 >= student2)
