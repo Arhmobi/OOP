@@ -55,6 +55,18 @@ class Lecturer(Mentor):
         all_grades = [grd for grade in self.grades.values() for grd in grade]
         return round(sum(all_grades) / len(all_grades), 1)
 
+    def __eq__(self, other):
+        return self.__average_grade() == other.__average_grade()
+
+    def __gt__(self, other):
+        return self.__average_grade() > other.__average_grade()
+
+    def __lt__(self, other):
+        return self.__average_grade() < other.__average_grade()
+
+    def __le__(self, other):
+        return self.__average_grade() <= other.__average_grade()
+
     def __str__(self):
         return f'Имя: {self.name}\n' f'Фамилия: {self.surname}\n' f'Средняя оценка за лекции: {self.__average_grade()}'
 
@@ -131,4 +143,7 @@ def average_lecturer(lecturer_list, course):
     print(sum_ / len(lecturer_list))
 
 average_lecturer(lecturer_list, 'Python')
-print(student1 <= student2)
+print(student1 >= student2)
+print(student1)
+print(lecturer1 != lecturer2)
+
