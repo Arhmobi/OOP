@@ -26,6 +26,15 @@ class Student:
         some_student = f'Имя: {self.name}\n' f'Фамилия: {self.surname}\n' f'Средняя оценка за домашнее задание: {self.__average_grade()}\n' f'Курсы в процессе изучения: {', '.join(self.courses_in_progress)}\n' f'Завершенные курсы: {', '.join(self.finished_courses)}'
         return some_student
 
+    def __eq__(self, other):
+        return self.grades == other.grades
+
+    def __le__(self, other):
+        return self.grades <= other.grades
+
+    def __lt__(self, other):
+        return self.grades < other.grades
+
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
@@ -43,7 +52,7 @@ class Lecturer(Mentor):
         return round(sum(all_grades) / len(all_grades), 1)
 
     def __str__(self):
-        return f'Имя: {self.name}\n' f'Фамилия: {self.surname}\n' f' Средняя оценка за лекции: {self.__average_grade()}'
+        return f'Имя: {self.name}\n' f'Фамилия: {self.surname}\n' f'Средняя оценка за лекции: {self.__average_grade()}'
 
 class Reviewer(Mentor):
     def rate_hw(self, student, course, grade):
@@ -68,7 +77,7 @@ student2 = Student('Victorya', 'Obramovich', 'female')
 student2.courses_in_progress += ['Python', 'C++', 'Basic']
 student2.finished_courses += ['Введение в программирование']
 
-student_list = [student1, student2]
+
 
 lecturer1 = Lecturer('Boris', 'Davidof')
 lecturer1.courses_attached += ['Python']
@@ -77,7 +86,7 @@ lecturer1.courses_attached += ['Python']
 lecturer2 = Lecturer('Ivan', 'Demidov')
 lecturer2.courses_attached += ['Python']
 
-lecturer_list = [lecturer1, lecturer2]
+
 
 rewiewer1 = Reviewer('Ignat', 'Lobanov')
 rewiewer1.courses_attached += ['Python']
@@ -96,8 +105,25 @@ student1.grade_lecturer(lecturer2, 'Python', 9)
 student2.grade_lecturer(lecturer1, 'Python', 10)
 student2.grade_lecturer(lecturer2, 'Python', 9)
 
+student_list = [student1, student2]
 
-print(lecturer1)
+def average_student(student_list, course):
+    sum_ = 0
+    for student in student_list:
+        if course in student.grades.keys():
+            for grades in student.grades[course]:
+                sum_ += grades
+    print(sum_ / len(student_list))
 
+average_student(student_list, 'Python')
 
+lecturer_list = [lecturer1, lecturer2]
+def average_lecturer(lecturer_list, course):
+    sum_ = 0
+    for lecturer in lecturer_list:
+        if course in lecturer.grades.keys():
+            for grades in lecturer.grades[course]:
+                sum_ += grades
+    print(sum_ / len(lecturer_list))
 
+average_lecturer(lecturer_list, 'Python')
