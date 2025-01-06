@@ -29,11 +29,12 @@ class Student:
     def __eq__(self, other):
         return self.grades == other.grades
 
-    def __le__(self, other):
-        return self.grades <= other.grades
+    def __gt__(self, other):
+        return self.__average_grade() > other.__average_grade()
 
     def __lt__(self, other):
-        return self.grades < other.grades
+        return self.__average_grade() < other.__average_grade()
+
 
 class Mentor:
     def __init__(self, name, surname):
@@ -127,3 +128,4 @@ def average_lecturer(lecturer_list, course):
     print(sum_ / len(lecturer_list))
 
 average_lecturer(lecturer_list, 'Python')
+print(student1 > student2)
